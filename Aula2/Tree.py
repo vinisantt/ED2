@@ -8,7 +8,6 @@ class Tree:
               if self.raiz != None:
                       return self.inOrdem()
 
-      #Método para encontrar o nível
       def nivel(self, valor):
               if self.raiz != None:
                       return self.raiz.nivel(valor)
@@ -71,10 +70,10 @@ class No:
               elif self.fb == -2:
                 self.balanceia_dir()
                 
-      def balanceia_dir(self): 
+      '''def balanceia_dir(self):''' 
         #METE O CÓDIGO AE
         
-      def balanceia_esq(self):
+      '''def balanceia_esq(self):'''
         #METE O CÓDIGO AE
 
       def calcfb(self):
@@ -90,40 +89,40 @@ class No:
 
 
       def altura(self):
-        esqu = dire = 0
-        
-        if self.esq != None:
-            esqu = self.esq.altura()
+            esqu = dire = 0
 
-        if self.dir != None:
-            dire = self.dir.altura()
+            if self.esq != None:
+                  esqu = self.esq.altura()
 
-        if esqu > dire:
-            return esqu + 1
-        else:
-            return dire + 1
+            if self.dir != None:
+                  dire = self.dir.altura()
+
+            if esqu > dire:
+                  return esqu + 1
+            else:
+                  return dire + 1
 
       def inOrdem(self):
-              if self.esq != None:
-                      self.esq.inOrdem()
-              print(self.info)
-              if self.dir != None:
-                      self.dir.inOrdem()
+            if self.esq != None:
+                  self.esq.inOrdem()
+            print(self.info)
+            if self.dir != None:
+                  self.dir.inOrdem()
 
 
       def nivel(self, valor):
-              ct = 1
-              if self.info > valor:
-                      if self.info == valor:
+            ct = 1
+            if self.info > valor:
+                  if self.info == valor:
+                        return ct
+                  elif self.esq != None:
+                        ct += self.esq.nivel(valor) 
+                  elif self.info < valor:
+                        if self.info == valor:
                               return ct
-                      elif self.esq != None:
-                              ct += self.esq.nivel(valor) 
-              elif self.info < valor:
-                      if self.info == valor:
-                              return ct
-                      elif self.dir != None:
-                              ct += self.dir.nivel(valor)
-              return ct
+                  elif self.dir != None:
+                        ct += self.dir.nivel(valor)
+            return ct
 
 
               
