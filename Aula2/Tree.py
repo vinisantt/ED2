@@ -1,106 +1,107 @@
 class Tree:
       def __init__(self):
-              self.raiz = None
-
-      
+            self.raiz = None
 
       def inOrdem(self):
-              if self.raiz != None:
-                      return self.inOrdem()
+            if self.raiz != None:
+                  return self.inOrdem()
 
       def nivel(self, valor):
-              if self.raiz != None:
-                      return self.raiz.nivel(valor)
+            if self.raiz != None:
+                  return self.raiz.nivel(valor)
 
       def insere(self, valor):
-              if self.raiz == None:
-                      self.raiz = No(valor)
-              else:
-                      self.raiz.insere(valor)
+            if self.raiz == None:
+                  self.raiz = No(valor)
+            else:
+                  self.raiz.insere(valor)
                       
       def balanceia_dir(self):
-        if self.raiz != None:
-          return self.raiz.balanceia_dir()
+            if self.raiz != None:
+                  return self.raiz.balanceia_dir()
 
       def balanceia_esq(self):
-        if self.raiz != None:
-          return self.raiz.balanceia_esq()
+            if self.raiz != None:
+                  return self.raiz.balanceia_esq()
         
       def altura(self):
-        if self.raiz != None:
-            return self.raiz.altura()
+            if self.raiz != None:
+                  return self.raiz.altura()
 
       def calcfb(self):
-        if self.raiz != None:
-          return self.raiz.calcfb()
+            if self.raiz != None:
+                  return self.raiz.calcfb()
+
+      def achafb(self,valor):
+            if self.raiz !=None:
+                  return self.raiz.achafb(valor)
           
 class No:
       def __init__(self, valor):
-              self.info = valor
-              self.esq = None
-              self.dir = None
-              self.fb = 0
+            self.info = valor
+            self.esq = None
+            self.dir = None
+            self.fb = 0
 
       def insere(self, valor):
-              if valor <= self.info:
-                if self.esq == None:
-                  self.esq = No(valor)
-                  self.fb = self.calcfb()
-                  print(self.fb)
+            
+            if valor <= self.info:
+                  if self.esq == None:
+                        self.esq = No(valor)
+                        self.fb = self.calcfb()
+                        
+                        
+
+                  else:
+                        self.esq.insere(valor)
+                        self.fb = self.calcfb()
+
+            else:
+                  if self.dir == None:
+                        self.dir = No(valor)
+                        self.fb = self.calcfb()
+                        
+
+                  else:
+                        self.dir.insere(valor)
+                        self.fb = self.calcfb()
                   
-                else:
-                  self.esq.insere(valor)
-                  self.fb = self.calcfb()
-                  print(self.fb)
+            
+              
 
-              else:
-                if self.dir == None:
-                  self.dir = No(valor)
-                  self.fb = self.calcfb()
-                  print(self.fb)
-
-                else:
-                  self.dir.insere(valor)
-                  self.fb = self.calcfb()
-                  print(self.fb)
-
-              if self.fb == 2:
-                self.balanceia_esq()
-
-              elif self.fb == -2:
-                self.balanceia_dir()
-                
-      '''def balanceia_dir(self):''' 
-        #METE O CÓDIGO AE
-        
-      '''def balanceia_esq(self):'''
-        #METE O CÓDIGO AE
-
+      def achafb(self,valor):
+            if valor == self.info:
+                  print("FB de",valor,"é:",self.fb)
+                  
+            else:
+                  print("entrou aqui")
+                  if valor < self.info:
+                        print("entrou aqui esquerda")
+                        self.esq.achafb(valor)
+                  else:
+                        print("entrou aqui direita")
+                        self.dir.achafb(valor)
+      
       def calcfb(self):
-        if self.dir != None and self.esq != None:
-          return self.dir.altura() - self.esq.altura()
-
-        else:
-          if self.dir == None:
-            return 0 - self.esq.altura()
-
-          else:
-            return self.dir.altura() - 0
+            if self.dir != None and self.esq != None:
+                  return 0
+            else:
+                  if self.dir == None and self.esq != None:
+                        return - self.esq.altura()
+                  elif self.dir != None and self.esq == None:
+                        return self.dir.altura() 
+                  else:
+                        return self.dir.altura() - self.esq.altura()
 
 
       def altura(self):
-            esqu = dire = 0
+            hesq=hdir=0
+            if self.esq!=None:
+                  hesq=self.esq.altura()
+            if self.dir!=None:
+                  hdir=self.dir.altura()
+            return 1 + max(hesq,hdir)
 
-            if self.esq != None:
-                  esqu = self.esq.altura()
-
-            if self.dir != None:
-                  dire = self.dir.altura()
-
-            if esqu > dire:
-                  return esqu + 1
-            else:
-                  return dire + 1
 
       def inOrdem(self):
             if self.esq != None:
@@ -124,5 +125,11 @@ class No:
                         ct += self.dir.nivel(valor)
             return ct
 
+      #def balanceia_dir(self):
+        #METE O CÓDIGO AE
+        
+      #def balanceia_esq(self):
+        #METE O CÓDIGO AE
 
               
+
