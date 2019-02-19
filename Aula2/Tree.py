@@ -4,7 +4,7 @@ class Tree:
 
       def inOrdem(self):
             if self.raiz != None:
-                  return self.inOrdem()
+                  return self.raiz.inOrdem()
 
       def nivel(self, valor):
             if self.raiz != None:
